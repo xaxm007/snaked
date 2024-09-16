@@ -1,5 +1,5 @@
-# S-naked
-- A simple snake game for Computer Graphics project built using C. 
+# snaked
+- A simple snake game for Computer Graphics project built using C/C++. 
 - An implementation of graphics programming using graphics.h library.
 
 # Requirements
