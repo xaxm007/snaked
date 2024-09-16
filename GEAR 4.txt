@@ -1,0 +1,146 @@
+#include<stdio.h>
+#include<time.h>
+#include<windows.h>
+#include<graphics.h>
+#include<stdlib.h>
+
+void gameover();
+int  endfunk(int e);
+
+int main()
+{
+    int gd=DETECT, gm, x=200, y=200, d=1, dir=1, rx=200, ry= 200, c=0 , fx, fy;
+    initgraph(&gd,&gm,"");
+    initwindow(683,600,"SNAKEMAN"); //window resolution and name
+    delay(1000);
+    srand(time(NULL)); //for starting point of food to be random every time
+    setfillstyle(1,2);
+    for(;;)
+    {
+        setfillstyle(1,0);//screen clear to black
+        bar(0,0,683,600);
+        setfillstyle(1,2);//boundary color for snake
+
+        //boundary bars
+        bar(0,0,683,10);
+        bar(0,590,683,600);
+        bar(0,10,10,590);
+        bar(673,10,683,590);
+
+        //to make food
+        if(x == rx && y == ry)
+        {
+            c = c + 1; //food  counter for  score
+
+            setfillstyle(1,0); //color to erase the previous food
+            bar(rx,ry,rx+10,ry+10); //previous food
+            do
+            {
+                rx = (1 + rand() % 663);
+                ry = (1 + rand() % 580);
+            }while(getpixel(rx,ry) != 0 && rx > 10 && ry > 10);
+            rx = rx / 10;
+            rx = rx * 10;
+            ry = ry / 10;
+            ry = ry * 10;
+            setfillstyle(1,14); // color for when snake reach the food
+        }
+        setfillstyle(1,14); // color for when new food is displayed
+        bar(rx,ry,rx+10,ry+10); //new food
+        setfillstyle(1,2);
+
+        //arrow keys
+        if(GetAsyncKeyState(VK_RIGHT))
+        {
+            d = 1;
+        }
+        else if(GetAsyncKeyState(VK_LEFT))
+        {
+            d = 2;
+        }
+        else if(GetAsyncKeyState(VK_UP))
+        {
+            d = 3;
+        }
+        else if(GetAsyncKeyState(VK_DOWN))
+        {
+            d = 4;
+        }
+        else
+        {
+            d = 0;
+        }
+
+        switch(d)
+        {
+        case 0: //when no arrow key is pressed
+            if(dir == 1)
+            {
+                x = x+10;
+            }
+            else if(dir == 2)
+            {
+                x = x-10;
+            }
+            else if(dir == 3)
+            {
+                y = y - 10;
+            }
+            else if(dir == 4)
+            {
+                y = y + 10;
+            }
+
+            else
+            {
+                d = 0;
+            }
+            break;
+
+        case 1: //right key
+            x = x + 10;
+            dir = 1;
+            break;
+
+        case 2: //left key
+            x = x - 10;
+            dir = 2;
+            break;
+
+        case 3: //up key
+            y = y - 10;
+            dir = 3;
+            break;
+
+        case 4: //down key
+            y = y + 10;
+            dir = 4;
+            break;
+
+        }
+        bar(x,y,x+10,y+10); //next move of snake
+        delay(100);
+        if(x >= 683 || x <= 0 || y <= 0 || y >= 600)// when snake cross the boundary
+        {
+            cleardevice();
+            gameover();
+            delay(2000);
+            endfunk(c);
+            break;
+        }
+    }
+}
+
+void gameover()
+{
+    setfillstyle(1,WHITE);
+    settextstyle(3,0,5);
+    outtextxy((getmaxx()/2)-130,(getmaxy()/2)-50,"Game Over");
+}
+int endfunk(int e)
+{
+    e=e-1;
+    system("cls");  //to clear the console window
+    printf("You died outside the boundary!!!\n");
+    printf("Your score is : %d\n", e);
+}
