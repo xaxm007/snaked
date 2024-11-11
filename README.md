@@ -1,21 +1,21 @@
-# snaked
+# 🐍 snaked
 - A simple snake game for Computer Graphics project built using C/C++. 
 - An implementation of graphics programming using graphics.h library.
 
-# Requirements
+## 🛠️ Requirements
 - `graphics.h` compiler
 - `CodeBlocks` IDE (Recommended)
     - Refer to the video for [graphics.h setup](https://www.youtube.com/watch?v=VEkAj-xVTKQ) in CodeBlocks on windows.
 
-# In-Game Snapshots
-### Start:
+## 📷 In-Game Snapshots
+#### Start:
 ![alt text](<Images/output 1.png>)
 ![alt text](<Images/output 2.png>)
 
-### Over:
+#### Over:
 ![alt text](<Images/output 3.png>)
 
-### Result:
+#### Result:
 ![alt text](<Images/output 4.png>)
 
 **Controls**:
@@ -24,7 +24,9 @@
 - `←` = Move Left
 - `→` = Move Right
 
-## In-game Instructions:
+---
+
+## 📋 In-game Instructions:
 
 - Direct the snake (green dot) to the food (yellow dot) using arrow keys.
 - 1 food equals 1 point.
